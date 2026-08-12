@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Shared project workspace: team, documents, timeline, budget, and activity." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project Workspace — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html" class="active">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1 id="project-title">Project Workspace</h1>
+    <p>Once a team is hired, the platform stops being a one-time lookup and becomes a shared workspace — this is what keeps everyone coming back daily, and what generates the performance data that improves future matching.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="tabs" id="project-tabs"></div>
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h3>Hired team</h3>
+          <div id="team-list"></div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Activity</h3>
+          <div id="activity-list"></div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Document vault</h3>
+          <p class="muted" style="font-size:0.87rem">Shared with every hired firm on this project — no more emailing PDFs between twenty different inboxes.</p>
+          <div id="doc-list"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Budget &amp; payments</h3>
+          <p class="muted" style="font-size:0.85rem">Milestone payments held in escrow and released when both sides confirm completion — so firms get paid on time and owners only pay for delivered work.</p>
+          <div id="budget-body"></div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Project timeline</h3>
+          <p class="muted" style="font-size:0.85rem" id="timeline-intro">Auto-populated with typical phase durations for this property type and jurisdiction, then updated as each phase completes.</p>
+          <div id="timeline-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  var project = DX.projectById(dxQueryParam("project") || "p01");
+  document.getElementById("project-title").textContent = project.name + " — Workspace";
+
+  document.getElementById("project-tabs").innerHTML = DX.SAMPLE_PROJECTS.map(function (p) {
+    return '<a href="workspace.html?project=' + p.id + '" class="tab-btn' + (p.id === project.id ? ' active' : '') + '" style="text-decoration:none">' + p.name + '</a>';
+  }).join("");
+
+  var statusPill = { "Complete": "pill-green", "In progress": "pill-gold", "Not started": "pill-muted", "Out for bid — see Bidding": "pill-gold" };
+
+  function roleInfo(roleName) {
+    for (var i = 0; i < DX.ROLE_REQUIREMENTS.length; i++) {
+      if (DX.ROLE_REQUIREMENTS[i].specialty === roleName) return DX.ROLE_REQUIREMENTS[i];
+    }
+    return null;
+  }
+
+  function memberCardHtml(member) {
+    var firm = member.firmId ? DX.firmById(member.firmId) : null;
+    var pillClass = statusPill[member.status] || "pill-muted";
+    var body = firm
+      ? '<a href="firm.html?id=' + firm.id + '"><strong>' + firm.name + '</strong></a>'
+      : '<span class="muted">Not yet awarded</span> <a href="bidding.html" style="font-weight:700">→ view bids</a>';
+    return '<div class="person-card">' +
+      '<div><div class="title" style="margin-bottom:2px">' + member.role + '</div><div class="name" style="font-size:0.92rem">' + body + '</div></div>' +
+      '<span class="pill ' + pillClass + '">' + member.status + '</span>' +
+    '</div>';
+  }
+
+  // Group the hired team by lifecycle phase (Predevelopment → Design → Financing → Construction → Leasing/Exit)
+  // so a 22-role team reads as a plan, not a wall of cards.
+  var teamHtml = "";
+  DX.PHASES.forEach(function (phaseName) {
+    var members = project.team.filter(function (m) {
+      var info = roleInfo(m.role);
+      return info && info.phase === phaseName;
+    });
+    if (!members.length) return;
+    teamHtml += '<h4 style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-soft);margin:18px 0 8px">' + phaseName + '</h4>' +
+      members.map(memberCardHtml).join("");
+  });
+  document.getElementById("team-list").innerHTML = teamHtml;
+
+  document.getElementById("doc-list").innerHTML = project.documents.map(function (doc) {
+    var firm = DX.firmById(doc.uploadedBy);
+    return '<div class="collab-card">' +
+      '<div><strong>' + doc.name + '</strong><div class="muted" style="font-size:0.78rem">Uploaded ' + doc.date + ' by ' + (firm ? firm.name : "Unknown") + '</div></div>' +
+      '<span class="pill pill-muted">' + doc.type + '</span>' +
+    '</div>';
+  }).join("");
+
+  document.getElementById("timeline-list").innerHTML = project.timeline.map(function (t) {
+    var pillClass = statusPill[t.status] || "pill-muted";
+    return '<div class="person-card">' +
+      '<div><div class="name" style="font-size:0.92rem">' + t.phase + '</div><div class="title">' + t.window + '</div></div>' +
+      '<span class="pill ' + pillClass + '">' + t.status + '</span>' +
+    '</div>';
+  }).join("");
+
+  // ---- budget & payments ----
+  var extras = DX.PROJECT_EXTRAS[project.id];
+  if (extras && extras.financials) {
+    var fin = extras.financials;
+    var paidPct = Math.round(100 * fin.paidToDate / fin.contracted);
+    document.getElementById("budget-body").innerHTML =
+      '<div class="stat-row" style="margin:14px 0">' +
+        '<div class="stat"><div class="num">' + dxFormatMoney(fin.contracted) + '</div><div class="lbl">Contracted</div></div>' +
+        '<div class="stat"><div class="num">' + dxFormatMoney(fin.paidToDate) + '</div><div class="lbl">Paid to date</div></div>' +
+        '<div class="stat"><div class="num">' + dxFormatMoney(fin.inEscrow) + '</div><div class="lbl">In escrow</div></div>' +
+      '</div>' +
+      '<div class="progress-track"><div class="progress-fill" style="width:' + paidPct + '%"></div></div>' +
+      '<div class="muted" style="font-size:0.78rem">' + paidPct + '% of contract value paid</div>' +
+      '<div class="note-box" style="margin-top:14px"><strong>Next milestone:</strong> ' + fin.nextMilestone.name + ' — ' + dxFormatMoney(fin.nextMilestone.amount) + ' releases on confirmation (due ' + fin.nextMilestone.due + ').</div>';
+  }
+
+  // ---- activity feed ----
+  if (extras && extras.activity) {
+    document.getElementById("activity-list").innerHTML = extras.activity.map(function (a) {
+      return '<div class="activity-item"><span>' + a.icon + '</span><div>' + a.text + '<span class="atime">' + a.time + '</span></div></div>';
+    }).join("");
+  }
+</script>
+</body>
+</html>

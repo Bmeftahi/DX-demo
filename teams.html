@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Book firm combinations with a confirmed history of working together." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Packaged Teams — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html" class="active">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1>Packaged Teams</h1>
+    <p>Firm combinations with a confirmed, mutually-verified track record of working together can market themselves as a single bookable package — instead of a developer assembling untested combinations one role at a time.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <div id="packages"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  function pairsHtml(members) {
+    var html = "";
+    for (var i = 0; i < members.length; i++) {
+      for (var j = i + 1; j < members.length; j++) {
+        var count = DX.collabCount(members[i], members[j]);
+        if (count > 0) {
+          var fa = DX.firmById(members[i]), fb = DX.firmById(members[j]);
+          html += '<div class="collab-card">' +
+            '<div><a href="firm.html?id=' + fa.id + '">' + fa.name + '</a> <span class="muted">↔</span> <a href="firm.html?id=' + fb.id + '">' + fb.name + '</a></div>' +
+            '<span class="proven-badge">✓ ' + count + ' confirmed project' + (count === 1 ? "" : "s") + '</span>' +
+          '</div>';
+        }
+      }
+    }
+    return html || '<p class="muted" style="font-size:0.85rem">No direct pairwise confirmations recorded between these members yet — they are grouped by a shared project history with other package members.</p>';
+  }
+
+  document.getElementById("packages").innerHTML = DX.PACKAGED_TEAMS.map(function (pkg) {
+    var members = pkg.members.map(function (id) { return DX.firmById(id); }).filter(Boolean);
+    var memberCards = members.map(function (f) { return dxFirmCardHtml(f); }).join("");
+    return '' +
+      '<div class="card" style="margin-bottom:26px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:6px">' +
+          '<h2 style="margin-bottom:0">' + pkg.name + '</h2>' +
+          '<div><span class="pill">' + pkg.propertyType + '</span> <span class="pill pill-gold">' + dxJurisdictionLabel(pkg.jurisdictionId) + '</span></div>' +
+        '</div>' +
+        '<p class="muted">' + pkg.description + '</p>' +
+        '<h4 style="margin-top:18px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-soft)">Confirmed working history</h4>' +
+        pairsHtml(pkg.members) +
+        '<h4 style="margin-top:18px;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-soft)">Package members (' + members.length + ')</h4>' +
+        memberCards +
+        '<button class="btn btn-gold btn-sm" style="margin-top:6px" disabled>Book this team (demo)</button>' +
+      '</div>';
+  }).join("");
+</script>
+</body>
+</html>

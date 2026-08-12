@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="What Development Exchange is, how it works, and frequently asked questions." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1>About Development Exchange</h1>
+    <p>Commercial real estate development takes twenty-plus specialist disciplines. We're building the one place where they all get found, vetted, hired, and paid.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container-narrow">
+    <div class="card">
+      <h3>The problem we exist to fix</h3>
+      <p style="font-size:0.95rem">A developer starting a project today assembles their team through word of mouth, cold Google searches, and whoever answered the phone last time. SWPPP consultants, lighting engineers, geotechnical firms — each is discoverable only through their own website, if at all. There is no shared place to see who's good, who's licensed, who knows the local permitting office, and crucially, <strong>who has actually worked well together before</strong>.</p>
+      <p style="font-size:0.95rem;margin-bottom:0">Development Exchange puts the entire supply chain of a development project on one platform — matched by property type, jurisdiction, and verified track record.</p>
+    </div>
+
+    <h2 style="margin:44px 0 30px;text-align:center">How it works — for developers</h2>
+    <div class="steps">
+      <div class="card step-card"><span class="step-num">1</span><h4>Describe your project</h4><p class="muted" style="font-size:0.88rem;margin:0">Property type, jurisdiction, size. <a href="build-team.html" style="font-weight:700;color:var(--navy)">Build My Team</a> proposes a full roster; <a href="post-project.html" style="font-weight:700;color:var(--navy)">Post a Project</a> invites qualified firms to bid.</p></div>
+      <div class="card step-card"><span class="step-num">2</span><h4>Compare &amp; hire</h4><p class="muted" style="font-size:0.88rem;margin:0">Normalized bids with best-value scoring, side-by-side <a href="compare.html" style="font-weight:700;color:var(--navy)">comparison</a>, reviews, and mutually-confirmed collaboration history.</p></div>
+      <div class="card step-card"><span class="step-num">3</span><h4>Run the project</h4><p class="muted" style="font-size:0.88rem;margin:0">A shared <a href="workspace.html" style="font-weight:700;color:var(--navy)">workspace</a> for documents, timeline, messaging, and milestone payments held in escrow.</p></div>
+    </div>
+
+    <h2 style="margin:44px 0 30px;text-align:center">How it works — for specialist firms</h2>
+    <div class="steps">
+      <div class="card step-card"><span class="step-num">1</span><h4>List &amp; verify</h4><p class="muted" style="font-size:0.88rem;margin:0"><a href="join.html" style="font-weight:700;color:var(--navy)">Create a profile</a> for the firm and its licensed professionals. Licenses are verified against state boards; insurance documentation is kept on file.</p></div>
+      <div class="card step-card"><span class="step-num">2</span><h4>Get matched</h4><p class="muted" style="font-size:0.88rem;margin:0">Appear in searches, team rosters, and RFP invitations that fit your specialty, property types, and jurisdictions — no cold outreach.</p></div>
+      <div class="card step-card"><span class="step-num">3</span><h4>Build a track record</h4><p class="muted" style="font-size:0.88rem;margin:0">Every completed project adds reviews, confirmed collaborations, and code-fluency signal that compounds into future work.</p></div>
+    </div>
+
+    <h2 id="faq" style="margin:44px 0 20px;text-align:center">Frequently asked questions</h2>
+    <details class="faq"><summary>Is this a real, live product?</summary><p>Not yet — this site is a working concept demo with fictional sample data. Every firm, review, message, and statistic is invented to demonstrate how the product would behave.</p></details>
+    <details class="faq"><summary>How do you verify firms?</summary><p>Two distinct marks, deliberately not collapsed into one badge: “License verified” means the license number was checked against the state licensing board — a true verification. “Insurance documentation on file” means a certificate of insurance was collected directly and is tracked for expiration — documentation, not an independent validation of coverage. Reviews and collaboration history only count when tied to a project both parties confirm happened.</p></details>
+    <details class="faq"><summary>What stops firms from taking deals off-platform?</summary><p>Nothing forcibly — and that's deliberate. The platform earns retention through the workspace, escrowed milestone payments, and the track record firms accumulate. Work done off-platform builds no reviews, no confirmed collaborations, and no code-fluency score.</p></details>
+    <details class="faq"><summary>How is the best-value bid score calculated?</summary><p>Normalized price (40%), timeline (20%), and the firm's track record — on-time, on-budget, responsiveness, and code fluency (40%). Lowest price is often the wrong signal for a partner you'll work with for a year.</p></details>
+    <details class="faq"><summary>Which markets are covered?</summary><p>The demo includes six markets: Maricopa County AZ, Cook County IL, Dallas County TX, King County WA, Fulton County GA, and the Inland Empire (Riverside–San Bernardino) CA — the launch market, with recruiting concentrated in Riverside, San Bernardino, Redlands, and Ontario. Los Angeles is the planned second market.</p></details>
+
+    <div class="card" id="contact" style="margin-top:40px;text-align:center">
+      <h3>Contact</h3>
+      <p class="muted" style="margin-bottom:0">This is a concept demo, so there's no support team behind it — but if it were live: <strong>hello@developmentexchange.example</strong></p>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>

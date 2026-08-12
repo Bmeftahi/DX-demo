@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Search and filter verified CRE specialist firms by specialty, property type, and jurisdiction." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Firm Directory — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html" class="active">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1>Firm Directory</h1>
+    <p>65 sample firms across 22 specialties — every discipline from land brokerage through property management — and 6 metro areas. Search by specialty, firm name, or city — or narrow it down with the filters.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="layout">
+      <aside class="filter-panel">
+        <h3>Filters</h3>
+        <div class="filter-group">
+          <label class="group-label" for="f-search">Search</label>
+          <input type="text" id="f-search" placeholder="Try “architect”, “SWPPP”, or a city…" />
+          <div class="chip-row" id="quick-chips" style="margin-top:10px;margin-bottom:0"></div>
+        </div>
+        <div class="filter-group">
+          <label class="group-label" for="f-specialty">Specialty</label>
+          <select id="f-specialty"></select>
+        </div>
+        <div class="filter-group">
+          <label class="group-label" for="f-proptype">Property type experience</label>
+          <select id="f-proptype"></select>
+        </div>
+        <div class="filter-group">
+          <label class="group-label" for="f-jurisdiction">Jurisdiction</label>
+          <select id="f-jurisdiction"></select>
+        </div>
+        <div class="filter-group">
+          <label class="group-label">Trust</label>
+          <div class="checkline"><input type="checkbox" id="f-verified" /><label for="f-verified">License-verified only</label></div>
+          <div class="checkline"><input type="checkbox" id="f-available" /><label for="f-available">Accepting new projects</label></div>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="f-reset" style="width:100%">Reset filters</button>
+      </aside>
+
+      <main>
+        <div class="results-bar">
+          <div class="results-count" id="results-count"></div>
+          <div class="sortbar">
+            <select id="sort-by">
+              <option value="match">Sort: Match score</option>
+              <option value="projects">Sort: Projects completed</option>
+              <option value="name">Sort: Name A–Z</option>
+            </select>
+          </div>
+        </div>
+        <div id="results"></div>
+        <div class="empty-state" id="empty-state" style="display:none">
+          No firms match those filters yet. Try widening your search — this is a small sample dataset for the demo.
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<div class="compare-bar" id="compare-bar" style="display:none">
+  <div class="container">
+    <span id="compare-count"></span>
+    <div>
+      <button class="btn btn-outline btn-sm" id="compare-clear" style="margin-right:8px">Clear</button>
+      <a href="compare.html" class="btn btn-gold btn-sm" id="compare-go">Compare →</a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  var specialtySel = document.getElementById("f-specialty");
+  var proptypeSel = document.getElementById("f-proptype");
+  var jurisdictionSel = document.getElementById("f-jurisdiction");
+  var searchInput = document.getElementById("f-search");
+  specialtySel.innerHTML = dxOptionsHtml(DX.SPECIALTIES, "All specialties");
+  proptypeSel.innerHTML = dxOptionsHtml(DX.PROPERTY_TYPES, "All property types");
+  jurisdictionSel.innerHTML = dxOptionsHtml(DX.JURISDICTIONS, "All jurisdictions");
+
+  // Quick-search chips — one per specialty, so "someone looking for an architect"
+  // can get there in a single click instead of typing.
+  document.getElementById("quick-chips").innerHTML = DX.SPECIALTIES.map(function (spec) {
+    return '<span class="chip" data-specialty="' + spec + '">' + spec + '</span>';
+  }).join("");
+  document.querySelectorAll("#quick-chips .chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      searchInput.value = "";
+      specialtySel.value = chip.getAttribute("data-specialty");
+      render();
+    });
+  });
+
+  // Pre-fill from query params — lets other pages (map, codes) or a nav search deep-link here.
+  var qSearch = dxQueryParam("q");
+  var qSpecialty = dxQueryParam("specialty");
+  var qJurisdiction = dxQueryParam("jurisdiction");
+  if (qSearch) searchInput.value = qSearch;
+  if (qSpecialty) specialtySel.value = qSpecialty;
+  if (qJurisdiction) jurisdictionSel.value = qJurisdiction;
+
+  function currentFilters() {
+    return {
+      search: searchInput.value.trim().toLowerCase(),
+      specialty: specialtySel.value,
+      proptype: proptypeSel.value,
+      jurisdiction: jurisdictionSel.value,
+      verifiedOnly: document.getElementById("f-verified").checked,
+      availableOnly: document.getElementById("f-available").checked,
+      sortBy: document.getElementById("sort-by").value
+    };
+  }
+
+  // Free-text search checks name, specialty, property types, bio, and jurisdiction —
+  // so typing "architect" or "Phoenix" both work, not just an exact firm name.
+  function matchesSearch(firm, term) {
+    if (!term) return true;
+    var haystack = [
+      firm.name,
+      firm.specialty,
+      firm.propertyTypes.join(" "),
+      firm.bio,
+      firm.jurisdictions.map(dxJurisdictionLabel).join(" ")
+    ].join(" ").toLowerCase();
+    return term.split(/\s+/).every(function (word) { return haystack.indexOf(word) !== -1; });
+  }
+
+  function render() {
+    var f = currentFilters();
+    var list = DX.FIRMS.filter(function (firm) {
+      if (!matchesSearch(firm, f.search)) return false;
+      if (f.specialty && firm.specialty !== f.specialty) return false;
+      if (f.proptype && firm.propertyTypes.indexOf(f.proptype) === -1) return false;
+      if (f.jurisdiction && firm.jurisdictions.indexOf(f.jurisdiction) === -1) return false;
+      if (f.verifiedOnly && !firm.verified) return false;
+      if (f.availableOnly && (!firm.availability || firm.availability.key !== "available")) return false;
+      return true;
+    });
+
+    list.sort(function (a, b) {
+      if (f.sortBy === "projects") return b.projectsCompleted - a.projectsCompleted;
+      if (f.sortBy === "name") return a.name.localeCompare(b.name);
+      return DX.overallScore(b.scores) - DX.overallScore(a.scores);
+    });
+
+    document.getElementById("results-count").textContent = list.length + " firm" + (list.length === 1 ? "" : "s") + " match" + (list.length === 1 ? "es" : "");
+    document.getElementById("empty-state").style.display = list.length ? "none" : "block";
+    document.getElementById("results").innerHTML = list.map(function (firm) {
+      var checked = compareSet.has(firm.id) ? "checked" : "";
+      return '<div class="firm-compare-item">' +
+        '<label class="compare-check"><input type="checkbox" class="compare-box" data-id="' + firm.id + '" ' + checked + ' /> Add to compare</label>' +
+        dxFirmCardHtml(firm) +
+      '</div>';
+    }).join("");
+  }
+
+  [searchInput, specialtySel, proptypeSel, jurisdictionSel, document.getElementById("f-verified"), document.getElementById("f-available"), document.getElementById("sort-by")].forEach(function (el) {
+    el.addEventListener("input", render);
+    el.addEventListener("change", render);
+  });
+  document.getElementById("f-reset").addEventListener("click", function () {
+    document.getElementById("f-search").value = "";
+    specialtySel.value = "";
+    proptypeSel.value = "";
+    jurisdictionSel.value = "";
+    document.getElementById("f-verified").checked = false;
+    document.getElementById("f-available").checked = false;
+    render();
+  });
+
+  // Compare selection — persists across re-filtering since it's stored outside the DOM.
+  var compareSet = new Set();
+  var MAX_COMPARE = 4;
+
+  function updateCompareBar() {
+    var bar = document.getElementById("compare-bar");
+    var n = compareSet.size;
+    if (n === 0) {
+      bar.style.display = "none";
+      document.body.classList.remove("has-compare-bar");
+      return;
+    }
+    bar.style.display = "block";
+    document.body.classList.add("has-compare-bar");
+    document.getElementById("compare-count").textContent = n + " firm" + (n === 1 ? "" : "s") + " selected" + (n >= MAX_COMPARE ? " (max " + MAX_COMPARE + ")" : "") + (n === 1 ? " — pick at least one more" : "");
+    var go = document.getElementById("compare-go");
+    if (n >= 2) {
+      go.setAttribute("href", "compare.html?ids=" + Array.from(compareSet).join(","));
+      go.removeAttribute("aria-disabled");
+    } else {
+      go.setAttribute("href", "#");
+      go.setAttribute("aria-disabled", "true");
+    }
+  }
+
+  document.getElementById("results").addEventListener("change", function (e) {
+    if (!e.target.classList.contains("compare-box")) return;
+    var id = e.target.getAttribute("data-id");
+    if (e.target.checked) {
+      if (compareSet.size >= MAX_COMPARE) {
+        e.target.checked = false;
+        return;
+      }
+      compareSet.add(id);
+    } else {
+      compareSet.delete(id);
+    }
+    updateCompareBar();
+  });
+
+  document.getElementById("compare-clear").addEventListener("click", function () {
+    compareSet.clear();
+    updateCompareBar();
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>

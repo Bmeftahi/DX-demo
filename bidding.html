@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Compare normalized bids and best-value scores on active RFPs." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bidding — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html" class="active">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1>Bidding / RFP</h1>
+    <p>A sample project soliciting General Contractor bids. Compare bids on a normalized basis and see a best-value score, not just lowest price.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="tabs" id="project-tabs"></div>
+    <div class="card" id="project-summary" style="margin-bottom:24px"></div>
+
+    <div class="results-bar">
+      <div>
+        <label class="checkline"><input type="checkbox" id="blind-toggle" checked /> Blind bidding — hide bid amounts from other firms until deadline</label>
+      </div>
+      <div id="reveal-action"></div>
+    </div>
+
+    <div class="bid-table-wrap">
+      <table class="bids" id="bids-table">
+        <thead>
+          <tr>
+            <th id="bid-role-header">General Contractor</th>
+            <th>Firm score</th>
+            <th>Price</th>
+            <th>Timeline</th>
+            <th>Best-value score</th>
+            <th>Notes</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="bids-body"></tbody>
+      </table>
+    </div>
+
+    <div class="note-box" style="margin-top:18px">
+      Best-value score blends normalized price (40%), timeline (20%), and the firm's overall track record — on-time, on-budget, responsiveness, code fluency (40%) — rather than ranking on price alone, which is often the wrong signal for a team you'll be working with for a year or more.
+    </div>
+
+    <div id="award-banner"></div>
+
+    <div class="card" style="margin-top:28px">
+      <h3>Bidder Q&amp;A</h3>
+      <p class="muted" style="font-size:0.87rem">Questions from bidding firms are anonymized and answered publicly to all bidders — everyone prices from the same information, the way a well-run RFP should work.</p>
+      <div id="qa-list"></div>
+      <div class="conv-reply" style="border-top:none;padding:14px 0 0">
+        <input type="text" id="qa-input" placeholder="Ask a question as a bidding firm… (demo)" />
+        <button class="btn btn-navy btn-sm" id="qa-send">Submit</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  var project = DX.projectById(dxQueryParam("project") || "p01");
+  var jurisdiction = DX.jurisdictionById(project.jurisdictionId);
+  var revealed = false;
+  var awardedFirmId = null;
+
+  document.getElementById("project-tabs").innerHTML = DX.SAMPLE_PROJECTS.map(function (p) {
+    return '<a href="bidding.html?project=' + p.id + '" class="tab-btn' + (p.id === project.id ? ' active' : '') + '" style="text-decoration:none">' + p.name + '</a>';
+  }).join("");
+  document.getElementById("bid-role-header").textContent = project.biddingRole;
+
+  document.getElementById("project-summary").innerHTML =
+    '<h3>' + project.name + '</h3>' +
+    '<p class="muted">' + project.description + '</p>' +
+    '<div class="stat-row">' +
+      '<div class="stat"><div class="num">' + project.propertyType + '</div><div class="lbl">Property type</div></div>' +
+      '<div class="stat"><div class="num">' + dxJurisdictionLabel(jurisdiction.id) + '</div><div class="lbl">Jurisdiction</div></div>' +
+      '<div class="stat"><div class="num">' + project.sqft.toLocaleString() + ' sf</div><div class="lbl">Building size</div></div>' +
+      '<div class="stat"><div class="num">' + project.budgetRange + '</div><div class="lbl">Budget range</div></div>' +
+    '</div>';
+
+  function computeBids() {
+    var prices = project.bids.map(function (b) { return b.price; });
+    var timelines = project.bids.map(function (b) { return b.timelineWeeks; });
+    var minPrice = Math.min.apply(null, prices), maxPrice = Math.max.apply(null, prices);
+    var minTime = Math.min.apply(null, timelines), maxTime = Math.max.apply(null, timelines);
+
+    return project.bids.map(function (b) {
+      var firm = DX.firmById(b.firmId);
+      var priceScore = maxPrice === minPrice ? 100 : 100 * (maxPrice - b.price) / (maxPrice - minPrice);
+      var timeScore = maxTime === minTime ? 100 : 100 * (maxTime - b.timelineWeeks) / (maxTime - minTime);
+      var firmScore = DX.overallScore(firm.scores);
+      var bestValue = Math.round(0.4 * priceScore + 0.2 * timeScore + 0.4 * firmScore);
+      return { bid: b, firm: firm, bestValue: bestValue };
+    }).sort(function (a, b) { return b.bestValue - a.bestValue; });
+  }
+
+  function render() {
+    var blind = document.getElementById("blind-toggle").checked;
+    var rows = computeBids();
+    var topScore = rows.length ? rows[0].bestValue : null;
+
+    document.getElementById("reveal-action").innerHTML = (blind && !revealed)
+      ? '<button class="btn btn-navy btn-sm" id="reveal-btn">Simulate deadline passed → reveal bids</button>'
+      : "";
+
+    document.getElementById("bids-body").innerHTML = rows.map(function (row) {
+      var hidden = blind && !revealed;
+      var isBest = row.bestValue === topScore && !hidden;
+      var priceCell = hidden ? '<span class="blind-lock">🔒 hidden</span>' : dxFormatMoney(row.bid.price);
+      var timeCell = hidden ? '<span class="blind-lock">🔒 hidden</span>' : row.bid.timelineWeeks + " wks";
+      var scoreCell = hidden ? '<span class="blind-lock">—</span>' : ('<strong>' + row.bestValue + '</strong>' + (isBest ? ' <span class="pill pill-green">Best value</span>' : ""));
+      var actionCell = awardedFirmId === row.firm.id
+        ? '<span class="pill pill-green">Awarded ✓</span>'
+        : ('<button class="btn btn-ghost btn-sm award-btn" data-id="' + row.firm.id + '" ' + (hidden || awardedFirmId ? "disabled" : "") + '>Award</button>');
+      return '<tr class="' + (isBest ? "best-value" : "") + '">' +
+        '<td><a href="firm.html?id=' + row.firm.id + '"><strong>' + row.firm.name + '</strong></a><div class="muted" style="font-size:0.78rem">' + row.firm.projectsCompleted + ' projects completed</div></td>' +
+        '<td>' + DX.overallScore(row.firm.scores) + '</td>' +
+        '<td>' + priceCell + '</td>' +
+        '<td>' + timeCell + '</td>' +
+        '<td>' + scoreCell + '</td>' +
+        '<td class="muted" style="font-size:0.82rem;max-width:220px">' + row.bid.note + '</td>' +
+        '<td>' + actionCell + '</td>' +
+      '</tr>';
+    }).join("");
+
+    document.querySelectorAll(".award-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        awardedFirmId = btn.getAttribute("data-id");
+        render();
+        var firm = DX.firmById(awardedFirmId);
+        document.getElementById("award-banner").innerHTML =
+          '<div class="note-box" style="margin-top:18px;background:#e6f4ec;border-color:#bfe2cd;color:#1f5133"><strong>' + firm.name + '</strong> has been awarded this project (demo action — nothing is actually sent). In the full product this would notify the firm, generate an award letter, and open the shared project workspace.</div>';
+      });
+    });
+  }
+
+  // ---- bidder Q&A ----
+  var extras = DX.PROJECT_EXTRAS[project.id];
+  var qaItems = (extras && extras.qa) ? extras.qa.slice() : [];
+  function renderQa() {
+    document.getElementById("qa-list").innerHTML = qaItems.map(function (item) {
+      return '<div class="review-card">' +
+        '<div style="font-weight:700;font-size:0.9rem;color:var(--navy)">Q: ' + item.q + '</div>' +
+        '<div class="rmeta" style="margin:2px 0 8px">' + item.askedBy + '</div>' +
+        (item.a
+          ? '<p style="margin:0"><strong>A:</strong> ' + item.a + '</p>'
+          : '<p style="margin:0" class="muted">Awaiting answer from the owner…</p>') +
+      '</div>';
+    }).join("");
+  }
+  document.getElementById("qa-send").addEventListener("click", function () {
+    var input = document.getElementById("qa-input");
+    var text = input.value.trim();
+    if (!text) return;
+    qaItems.push({ q: text, a: null, askedBy: "You (anonymized to other bidders)" });
+    input.value = "";
+    renderQa();
+  });
+  renderQa();
+
+  document.getElementById("blind-toggle").addEventListener("change", render);
+  document.addEventListener("click", function (e) {
+    if (e.target && e.target.id === "reveal-btn") {
+      revealed = true;
+      render();
+    }
+  });
+
+  render();
+</script>
+</body>
+</html>

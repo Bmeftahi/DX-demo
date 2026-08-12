@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Find the right team for your next development. CRE specialists matched by property type, location, and experience — now in the Inland Empire." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Development Exchange — Find the Right Team for Your Next Development</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+<style>
+@media (max-width: 620px) { .intake-grid { grid-template-columns: 1fr !important; } }
+.hero .card h4, .hero .card label { color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html" class="active">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Now matching in the Inland Empire — concept demo, sample data</span>
+    <h1>Find the right team for your next development.</h1>
+    <p class="lead">Architects, engineers, consultants, and contractors — matched by property type, location, and experience in your jurisdiction.</p>
+
+    <div class="card" style="max-width:760px;margin-top:10px;padding:22px 24px">
+      <div style="font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:12px">What are you developing?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" class="intake-grid">
+        <div>
+          <label for="in-type" style="display:block;font-size:0.72rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:5px">Property type</label>
+          <select id="in-type" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit"></select>
+        </div>
+        <div>
+          <label for="in-jurisdiction" style="display:block;font-size:0.72rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:5px">Location</label>
+          <select id="in-jurisdiction" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit"></select>
+        </div>
+        <div>
+          <label for="in-sqft" style="display:block;font-size:0.72rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:5px">Building size (sq ft)</label>
+          <input type="number" id="in-sqft" placeholder="40,000" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit" />
+        </div>
+        <div>
+          <label for="in-acres" style="display:block;font-size:0.72rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:5px">Site size (acres)</label>
+          <input type="number" step="0.1" id="in-acres" placeholder="2.5" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit" />
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;margin-top:16px;flex-wrap:wrap">
+        <button class="btn btn-gold" id="in-go">Build My Team →</button>
+        <a href="directory.html" style="font-weight:700;color:var(--navy);font-size:0.9rem">or find a specific specialist →</a>
+      </div>
+    </div>
+
+    <p style="margin-top:18px;color:rgba(255,255,255,0.65);font-size:0.85rem" id="trust-strip"></p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>How it works</h2>
+      <p class="muted">Three steps from a blank page to a working team — free for developers, always.</p>
+    </div>
+    <div class="steps">
+      <div class="card step-card"><span class="step-num">1</span><h4>Describe your project</h4><p class="muted" style="font-size:0.88rem;margin:0">Property type, location, size. The platform recommends the roles you'll typically need — and explains why, so you can confirm against local requirements.</p></div>
+      <div class="card step-card"><span class="step-num">2</span><h4>Compare &amp; hire</h4><p class="muted" style="font-size:0.88rem;margin:0">License-verified local firms, side-by-side comparison, and structured bids ranked on best value — price, timeline, and track record together, not lowest number.</p></div>
+      <div class="card step-card"><span class="step-num">3</span><h4>Run the project</h4><p class="muted" style="font-size:0.88rem;margin:0">One workspace for the whole team: documents, timeline, and messaging in one place instead of twenty inboxes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <h2>Active opportunities in the Inland Empire</h2>
+      <p class="muted" id="opp-total"></p>
+    </div>
+    <div class="grid grid-3" id="opp-cards"></div>
+    <p style="text-align:center;margin-top:22px"><a href="post-project.html" class="btn btn-navy btn-sm">Post your project →</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+      <div class="card">
+        <h3>Why the Inland Empire first</h3>
+        <p class="muted" style="font-size:0.92rem">Big coastal developers have in-house benches and decades-old consultant relationships. The Inland Empire runs differently: small and mid-size developers — and plenty of first-time sponsors — assemble a team project by project. Add permitting that changes city by city across dozens of municipalities, and this is exactly the market a matching platform serves best.</p>
+        <div class="stat-row" id="la-stats" style="margin-bottom:6px"></div>
+        <a href="jurisdictions.html?id=J6" class="btn btn-ghost btn-sm">See the Inland Empire code report →</a>
+      </div>
+      <div class="card" style="background:var(--navy);border-color:var(--navy)">
+        <h3 style="color:#fff">Are you a specialist firm?</h3>
+        <p style="color:rgba(255,255,255,0.8);font-size:0.92rem">Get listed, get license-verified, and get matched to Inland Empire projects actively looking for your discipline — instead of buying cold leads.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="join.html" class="btn btn-gold btn-sm">Get listed →</a>
+          <a href="pricing.html" class="btn btn-outline btn-sm">See pricing</a>
+        </div>
+      </div>
+    </div>
+    <p class="muted" style="text-align:center;font-size:0.85rem;margin-top:34px">Want the whole picture — packaged teams, the relationship network, escrowed payments, and the long-term roadmap? <a href="vision.html" style="font-weight:700;color:var(--navy)">Read the full vision →</a></p>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  document.getElementById("in-type").innerHTML = DX.PROPERTY_TYPES.map(function (pt) { return '<option>' + pt + '</option>'; }).join("");
+  document.getElementById("in-jurisdiction").innerHTML = DX.JURISDICTIONS.map(function (j) {
+    return '<option value="' + j.id + '"' + (j.id === "J6" ? " selected" : "") + '>' + j.county + ', ' + j.state + '</option>';
+  }).join("");
+
+  document.getElementById("in-go").addEventListener("click", function () {
+    var ptype = document.getElementById("in-type").value;
+    var j = DX.jurisdictionById(document.getElementById("in-jurisdiction").value);
+    var sqft = document.getElementById("in-sqft").value;
+    var acres = document.getElementById("in-acres").value;
+    var brief = "I'm developing a " + (sqft ? Number(sqft).toLocaleString() + " sq ft " : "") + ptype.toLowerCase() +
+      (acres ? " on a " + acres + "-acre site" : "") + " in " + j.county + ", " + j.state + ".";
+    window.location.href = "build-team.html?brief=" + encodeURIComponent(brief);
+  });
+
+  // trust strip + LA stats from live data
+  var la = DX.jurisdictionById("J6");
+  var laFirms = DX.FIRMS.filter(function (f) { return f.jurisdictions.indexOf("J6") !== -1; });
+  var laVerified = laFirms.filter(function (f) { return f.verified; }).length;
+  document.getElementById("trust-strip").textContent =
+    laFirms.length + " Inland Empire firms listed · " + laVerified + " license-verified · free for developers · sample data for the concept demo";
+  document.getElementById("la-stats").innerHTML =
+    '<div class="stat"><div class="num">' + laFirms.length + '</div><div class="lbl">IE firms listed</div></div>' +
+    '<div class="stat"><div class="num">~' + la.avgApprovalWeeks + ' wks</div><div class="lbl">Avg. approval</div></div>' +
+    '<div class="stat"><div class="num">' + la.difficulty + '</div><div class="lbl">Permitting difficulty</div></div>';
+
+  // active opportunities (sample)
+  var OPPS = [
+    { name: "Arroyo Vista Apartments", where: "Downtown Riverside", type: "Multifamily · 80 units", value: "$28M – $32M",
+      seeking: ["General Contractor"], href: "bidding.html?project=p02", cta: "View live bids →" },
+    { name: "Ontario Gateway Logistics", where: "Ontario", type: "Industrial/Warehouse · 210,000 sf", value: "$26M – $30M",
+      seeking: ["Civil Engineer", "Geotechnical Engineer", "SWPPP Consultant"], href: "directory.html?jurisdiction=J6", cta: "See matched firms →" },
+    { name: "Citrus Plaza Pads", where: "Redlands", type: "Retail/QSR · 3 pad sites", value: "$8M – $10M",
+      seeking: ["Civil Engineer", "Land Surveyor", "Lighting Engineer"], href: "directory.html?jurisdiction=J6", cta: "See matched firms →" }
+  ];
+  document.getElementById("opp-total").textContent = "Roughly $68M of sample projects currently seeking firms — this is what the supply side sees on day one.";
+  document.getElementById("opp-cards").innerHTML = OPPS.map(function (o) {
+    return '<div class="card">' +
+      '<div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap"><h3 style="font-size:1.05rem;margin-bottom:2px">' + o.name + '</h3><span class="pill pill-gold">' + o.value + '</span></div>' +
+      '<p class="muted" style="font-size:0.83rem;margin-bottom:12px">' + o.type + ' · ' + o.where + '</p>' +
+      '<div style="font-size:0.72rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">Seeking</div>' +
+      '<div class="firm-tags">' + o.seeking.map(function (s) { return '<span class="pill">' + s + '</span>'; }).join("") + '</div>' +
+      '<a href="' + o.href + '" style="font-weight:700;font-size:0.85rem;color:var(--navy);display:inline-block;margin-top:10px">' + o.cta + '</a>' +
+    '</div>';
+  }).join("");
+</script>
+</body>
+</html>

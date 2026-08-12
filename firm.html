@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Firm profile with verified track record, reviews, and confirmed collaborators." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Firm Profile — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html" class="active">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="directory.html">← Back to directory</a></div>
+    <div class="profile-hero" id="profile-hero"></div>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h3>About</h3>
+          <p id="bio"></p>
+          <div class="stat-row" id="stat-row"></div>
+        </div>
+
+        <div class="card" style="margin-top:20px" id="individuals-card">
+          <h3>Individual professionals</h3>
+          <p class="muted" style="font-size:0.87rem">Licensure and project history at the individual level — separate from, and nested under, the firm profile. This is what lets a specific architect or engineer's track record travel with them, not just the company brand.</p>
+          <div id="individuals-list"></div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Confirmed collaborators</h3>
+          <p class="muted" style="font-size:0.87rem">A past collaboration only appears here once both firms confirm it — so the signal stays credible rather than being one-sided self-reporting.</p>
+          <div id="collab-list"></div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3 style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">Reviews <span id="review-summary" style="font-weight:600;font-size:0.9rem"></span></h3>
+          <p class="muted" style="font-size:0.87rem">Reviews can only be left by a counterparty on a confirmed platform project — no drive-by ratings.</p>
+          <div id="reviews-list"></div>
+        </div>
+
+        <div id="package-card"></div>
+      </div>
+
+      <div>
+        <div class="card" id="hire-card">
+          <h3>Work with this firm</h3>
+          <div id="availability-line" style="margin:10px 0 14px"></div>
+          <div style="display:grid;gap:10px">
+            <a id="msg-firm-btn" class="btn btn-navy btn-sm" style="justify-content:center">✉ Message firm</a>
+            <a href="post-project.html" class="btn btn-gold btn-sm" style="justify-content:center">Invite to bid on a project</a>
+            <button class="btn btn-ghost btn-sm" id="save-firm-btn" style="justify-content:center"></button>
+          </div>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <h3>Performance</h3>
+          <div class="score-bars" id="score-bars"></div>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <h3>Serves</h3>
+          <div id="serves-tags" class="firm-tags" style="margin-top:6px"></div>
+        </div>
+        <div class="card" style="margin-top:20px" id="verification-card">
+          <h3>Trust & verification</h3>
+          <div id="verification-body"></div>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <h3>Similar firms</h3>
+          <div id="similar-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  var id = dxQueryParam("id");
+  var firm = DX.firmById(id);
+
+  if (!firm) {
+    document.querySelector(".section-tight .container").innerHTML =
+      '<div class="empty-state">No firm found for id "' + (id || "") + '". <a href="directory.html">Return to the directory</a>.</div>';
+  } else {
+    document.title = firm.name + " — Development Exchange";
+
+    document.getElementById("profile-hero").innerHTML =
+      '<div class="profile-avatar">' + dxInitials(firm.name) + '</div>' +
+      '<div>' +
+        '<h1 style="margin-bottom:6px">' + firm.name + '</h1>' +
+        '<p style="margin:0;color:rgba(255,255,255,0.8)">' + firm.specialty + ' · ' + firm.jurisdictions.map(dxJurisdictionLabel).join("; ") + '</p>' +
+        '<div style="margin-top:6px">' + dxRatingLineHtml(firm.id) + '</div>' +
+      '</div>';
+
+    document.getElementById("bio").textContent = firm.bio;
+
+    document.getElementById("stat-row").innerHTML =
+      '<div class="stat"><div class="num">' + firm.projectsCompleted + '</div><div class="lbl">Projects completed</div></div>' +
+      '<div class="stat"><div class="num">' + firm.founded + '</div><div class="lbl">Founded</div></div>' +
+      '<div class="stat"><div class="num">' + DX.overallScore(firm.scores) + '</div><div class="lbl">Overall match score</div></div>';
+
+    if (firm.individuals && firm.individuals.length) {
+      document.getElementById("individuals-list").innerHTML = firm.individuals.map(function (person) {
+        return '<div class="person-card">' +
+          '<div><div class="name">' + person.name + '</div><div class="title">' + person.title + ' · ' + person.years + ' yrs experience</div></div>' +
+          '<div class="pill pill-muted">' + person.license + '</div>' +
+        '</div>';
+      }).join("");
+    } else {
+      document.getElementById("individuals-card").innerHTML =
+        '<h3>Individual professionals</h3><p class="muted" style="font-size:0.87rem">No individual professional profiles added yet for this firm in the sample data.</p>';
+    }
+
+    if (firm.collaborators && firm.collaborators.length) {
+      document.getElementById("collab-list").innerHTML = firm.collaborators.map(function (c) {
+        var other = DX.firmById(c.id);
+        if (!other) return "";
+        return '<div class="collab-card">' +
+          '<div><a href="firm.html?id=' + other.id + '"><strong>' + other.name + '</strong></a> <span class="muted" style="font-size:0.82rem">— ' + other.specialty + '</span></div>' +
+          '<span class="proven-badge">✓ ' + c.count + ' confirmed project' + (c.count === 1 ? "" : "s") + ' together</span>' +
+        '</div>';
+      }).join("");
+    } else {
+      document.getElementById("collab-list").innerHTML = '<p class="muted" style="font-size:0.87rem">No confirmed collaborations recorded yet.</p>';
+    }
+
+    var pkg = null;
+    for (var pi = 0; pi < DX.PACKAGED_TEAMS.length; pi++) {
+      if (DX.PACKAGED_TEAMS[pi].members.indexOf(firm.id) !== -1) { pkg = DX.PACKAGED_TEAMS[pi]; break; }
+    }
+    if (pkg) {
+      document.getElementById("package-card").innerHTML =
+        '<div class="card" style="margin-top:20px;background:#f6efe3;border-color:#eaddc0">' +
+          '<span class="proven-badge" style="margin-bottom:8px;display:inline-flex">Part of a proven team package</span>' +
+          '<h3 style="margin-top:6px">' + pkg.name + '</h3>' +
+          '<p class="muted" style="font-size:0.87rem">' + pkg.description + '</p>' +
+          '<a href="teams.html" class="btn btn-navy btn-sm">View the full package →</a>' +
+        '</div>';
+    }
+
+    document.getElementById("score-bars").innerHTML = dxScoreBarsHtml(firm.scores);
+
+    document.getElementById("serves-tags").innerHTML = dxTagsHtml(firm);
+
+    document.getElementById("verification-body").innerHTML =
+      (firm.verified
+        ? '<p class="badge-verified" style="margin-bottom:8px">License verified</p><p class="pill pill-muted" style="margin-bottom:10px">Insurance documentation on file</p><p class="muted" style="font-size:0.85rem">License checked against state licensing records. Certificate of insurance collected directly and tracked for expiration \u2014 documentation on file, not an independent validation of coverage.</p>'
+        : '<p class="pill pill-muted" style="margin-bottom:10px">Verification pending</p><p class="muted" style="font-size:0.85rem">This firm has not yet completed license verification in the sample data.</p>');
+
+    // ---- reviews ----
+    var summary = DX.ratingSummary(firm.id);
+    document.getElementById("review-summary").innerHTML = dxStarsHtml(summary.avg) + ' <strong>' + summary.avg + '</strong> <span class="muted">(' + summary.count + ')</span>';
+    document.getElementById("reviews-list").innerHTML = DX.reviewsForFirm(firm.id).map(function (r) {
+      return '<div class="review-card">' +
+        '<div class="rhead">' +
+          '<span class="rname">' + r.author + ' <span class="muted" style="font-weight:500">· ' + r.company + '</span></span>' +
+          '<span>' + dxStarsHtml(r.rating) + '</span>' +
+        '</div>' +
+        '<div class="rmeta">' + r.date + (r.verified ? ' · <span style="color:var(--success);font-weight:700">✓ Verified project</span>' : '') + '</div>' +
+        '<p style="margin-top:8px">' + r.text + '</p>' +
+      '</div>';
+    }).join("");
+
+    // ---- hire card: availability, response time, save, message ----
+    document.getElementById("availability-line").innerHTML =
+      dxAvailabilityPillHtml(firm) +
+      '<div class="muted" style="font-size:0.8rem;margin-top:8px">Typically replies within ~' + firm.responseHours + ' hours</div>';
+    var convId = null;
+    DX.CONVERSATIONS.forEach(function (c) { if (c.firmId === firm.id) convId = c.id; });
+    document.getElementById("msg-firm-btn").setAttribute("href", convId ? "messages.html?c=" + convId : "messages.html");
+    var saveBtn = document.getElementById("save-firm-btn");
+    function renderSaveBtn() {
+      saveBtn.innerHTML = dxIsSaved(firm.id) ? "♥ Saved — remove" : "♡ Save to shortlist";
+    }
+    renderSaveBtn();
+    saveBtn.addEventListener("click", function () { dxToggleSaved(firm.id); renderSaveBtn(); });
+
+    // ---- similar firms: same specialty, ranked by shared jurisdiction then score ----
+    var similar = DX.FIRMS.filter(function (f) { return f.specialty === firm.specialty && f.id !== firm.id; })
+      .sort(function (a, b) {
+        function s(x) {
+          var shared = x.jurisdictions.some(function (j) { return firm.jurisdictions.indexOf(j) !== -1; }) ? 100 : 0;
+          return shared + DX.overallScore(x.scores);
+        }
+        return s(b) - s(a);
+      }).slice(0, 3);
+    document.getElementById("similar-list").innerHTML = similar.length ? similar.map(function (f) {
+      return '<div class="collab-card"><div><a href="firm.html?id=' + f.id + '"><strong>' + f.name + '</strong></a>' +
+        '<div class="muted" style="font-size:0.78rem">' + f.jurisdictions.map(dxJurisdictionLabel).join("; ") + ' · score ' + DX.overallScore(f.scores) + '</div></div>' +
+        dxSaveBtnHtml(f.id) + '</div>';
+    }).join("") : '<p class="muted" style="font-size:0.85rem">No other firms in this specialty yet.</p>';
+  }
+</script>
+</body>
+</html>

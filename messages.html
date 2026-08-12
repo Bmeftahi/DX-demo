@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="All your firm conversations across every project, in one inbox." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Messages — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1>Messages</h1>
+    <p>Every conversation with every firm on every project, in one inbox — instead of scattered across twenty email threads.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="inbox-layout">
+      <div class="thread-list" id="thread-list"></div>
+      <div class="conv-pane">
+        <div class="conv-head" id="conv-head"></div>
+        <div class="conv-body" id="conv-body"></div>
+        <div class="conv-reply">
+          <input type="text" id="reply-input" placeholder="Type a reply… (demo — stays on your computer)" />
+          <button class="btn btn-navy btn-sm" id="reply-send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  var activeId = dxQueryParam("c") || DX.CONVERSATIONS[0].id;
+
+  function convById(id) {
+    for (var i = 0; i < DX.CONVERSATIONS.length; i++) { if (DX.CONVERSATIONS[i].id === id) return DX.CONVERSATIONS[i]; }
+    return DX.CONVERSATIONS[0];
+  }
+
+  function renderThreads() {
+    document.getElementById("thread-list").innerHTML = DX.CONVERSATIONS.map(function (c) {
+      var firm = DX.firmById(c.firmId);
+      var last = c.messages[c.messages.length - 1];
+      var proj = c.projectId ? DX.projectById(c.projectId).name : "General";
+      return '<a class="thread-item' + (c.id === activeId ? " active" : "") + '" href="messages.html?c=' + c.id + '" data-thread="' + c.id + '">' +
+        '<div class="tname">' + firm.name + (c.unread ? '<span class="unread-dot"></span>' : "") + '</div>' +
+        '<div class="muted" style="font-size:0.72rem">' + proj + '</div>' +
+        '<div class="tsnippet">' + last.text + '</div>' +
+      '</a>';
+    }).join("");
+  }
+
+  function renderConversation() {
+    var c = convById(activeId);
+    var firm = DX.firmById(c.firmId);
+    var proj = c.projectId ? DX.projectById(c.projectId) : null;
+    document.getElementById("conv-head").innerHTML =
+      '<div><a href="firm.html?id=' + firm.id + '" style="font-weight:700;color:var(--navy)">' + firm.name + '</a>' +
+      '<div class="muted" style="font-size:0.78rem">' + firm.specialty + (proj ? ' · ' + proj.name : "") + ' · replies in ~' + firm.responseHours + 'h</div></div>' +
+      (proj ? '<a href="workspace.html?project=' + proj.id + '" class="btn btn-ghost btn-sm">Open workspace</a>' : "");
+    var body = document.getElementById("conv-body");
+    body.innerHTML = c.messages.map(function (m) {
+      return '<div class="bubble ' + m.from + '">' + m.text + '<span class="btime">' + m.time + '</span></div>';
+    }).join("");
+    body.scrollTop = body.scrollHeight;
+    c.unread = false;
+  }
+
+  function sendReply() {
+    var input = document.getElementById("reply-input");
+    var text = input.value.trim();
+    if (!text) return;
+    convById(activeId).messages.push({ from: "you", time: "Just now", text: text });
+    input.value = "";
+    renderConversation();
+    renderThreads();
+  }
+
+  document.getElementById("reply-send").addEventListener("click", sendReply);
+  document.getElementById("reply-input").addEventListener("keydown", function (e) { if (e.key === "Enter") sendReply(); });
+
+  // switch threads without a full page reload
+  document.getElementById("thread-list").addEventListener("click", function (e) {
+    var item = e.target.closest ? e.target.closest(".thread-item") : null;
+    if (!item) return;
+    e.preventDefault();
+    activeId = item.getAttribute("data-thread");
+    renderThreads();
+    renderConversation();
+  });
+
+  renderThreads();
+  renderConversation();
+</script>
+
+</body>
+</html>

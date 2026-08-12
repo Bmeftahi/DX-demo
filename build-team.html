@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Describe your project and get a full proposed specialist roster automatically." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Build My Team — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html" class="active">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1>Build My Team</h1>
+    <p>Describe your project in plain language. The matching engine detects property type, jurisdiction, and site size, then proposes a full roster spanning predevelopment through construction — 18 typically-required roles, grouped by phase, plus optional recommendations like an owner's rep or leasing broker.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="prompt-box">
+      <label class="group-label" for="prompt" style="display:block;margin-bottom:8px">Describe what you're building</label>
+      <textarea id="prompt" placeholder="e.g. I'm developing a 40,000 sq ft medical office building on a 3.2-acre site in Maricopa County, AZ."></textarea>
+      <div class="chip-row">
+        <span class="chip" data-fill="I'm developing a 40,000 sq ft medical office building on a 3.2-acre site in Maricopa County, AZ.">Medical office · Maricopa County</span>
+        <span class="chip" data-fill="120-unit multifamily development in Cook County, Chicago, roughly 2 acres.">Multifamily · Cook County</span>
+        <span class="chip" data-fill="250,000 sq ft industrial warehouse on a 12-acre site in Dallas County, TX.">Industrial · Dallas County</span>
+        <span class="chip" data-fill="Retail/QSR pad site in Fulton County, Atlanta, under an acre.">Retail/QSR · Fulton County</span>
+        <span class="chip" data-fill="80-unit multifamily development in the Inland Empire near Riverside, roughly 1.5 acres.">Multifamily · Inland Empire</span>
+      </div>
+      <button class="btn btn-gold" id="generate-btn">Build my team →</button>
+    </div>
+
+    <div id="parse-summary" style="margin-top:22px"></div>
+    <div id="roster-output"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  document.querySelectorAll(".chip[data-fill]").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      document.getElementById("prompt").value = chip.getAttribute("data-fill");
+    });
+  });
+
+  var PROPERTY_TYPE_KEYWORDS = {
+    "Medical Office": ["medical office", "medical", "clinic", "healthcare", "mob"],
+    "Industrial/Warehouse": ["industrial", "warehouse", "distribution", "logistics"],
+    "Multifamily": ["multifamily", "multi-family", "apartment", "residential units", "unit development"],
+    "Retail/QSR": ["retail", "qsr", "quick service", "restaurant", "pad site"]
+  };
+
+  function detectPropertyType(text) {
+    var lower = text.toLowerCase();
+    for (var type in PROPERTY_TYPE_KEYWORDS) {
+      var kws = PROPERTY_TYPE_KEYWORDS[type];
+      for (var i = 0; i < kws.length; i++) {
+        if (lower.indexOf(kws[i]) !== -1) return type;
+      }
+    }
+    return null;
+  }
+
+  function detectJurisdiction(text) {
+    var lower = text.toLowerCase();
+    // City/region aliases that should resolve to a jurisdiction even when the
+    // county name isn't written out — the Inland Empire spans dozens of cities.
+    var ALIASES = { "inland empire": "J6", "riverside": "J6", "san bernardino": "J6", "redlands": "J6",
+      "ontario": "J6", "fontana": "J6", "rancho cucamonga": "J6", "corona": "J6", "moreno valley": "J6", "temecula": "J6" };
+    for (var key in ALIASES) {
+      if (lower.indexOf(key) !== -1) return DX.jurisdictionById(ALIASES[key]);
+    }
+    for (var i = 0; i < DX.JURISDICTIONS.length; i++) {
+      var j = DX.JURISDICTIONS[i];
+      var cityName = j.city.split(",")[0].toLowerCase();
+      if (lower.indexOf(j.county.toLowerCase()) !== -1) return j;
+      if (lower.indexOf(cityName) !== -1) return j;
+    }
+    return null;
+  }
+
+  function detectAcres(text) {
+    var lower = text.toLowerCase();
+    if (/under (an|1) acre|less than (an|1) acre|under half an acre/.test(lower)) return 0.5;
+    var match = text.match(/(\d+(\.\d+)?)\s*[- ]?acre/i);
+    return match ? parseFloat(match[1]) : null;
+  }
+
+  function conditionMet(rule, propertyType, acres) {
+    if (rule.condition === "acres") return acres === null || acres >= rule.threshold;
+    if (rule.condition === "lighting") return rule.propertyTypes.indexOf(propertyType) !== -1;
+    return true;
+  }
+
+  function requiredRoles(propertyType, acres) {
+    return DX.ROLE_REQUIREMENTS.filter(function (rule) {
+      if (rule.recommended) return false;
+      if (rule.always) return true;
+      return conditionMet(rule, propertyType, acres);
+    });
+  }
+
+  function recommendedRoles() {
+    return DX.ROLE_REQUIREMENTS.filter(function (rule) { return rule.recommended; });
+  }
+
+  function pickCandidates(specialty, jurisdictionId, propertyType) {
+    var exact = DX.FIRMS.filter(function (f) {
+      return f.specialty === specialty && f.jurisdictions.indexOf(jurisdictionId) !== -1 && f.propertyTypes.indexOf(propertyType) !== -1;
+    });
+    if (exact.length) return { list: exact, fallback: null };
+
+    var byJurisdiction = DX.FIRMS.filter(function (f) {
+      return f.specialty === specialty && f.jurisdictions.indexOf(jurisdictionId) !== -1;
+    });
+    if (byJurisdiction.length) return { list: byJurisdiction, fallback: "No exact " + propertyType.toLowerCase() + " match locally — showing closest local firm instead." };
+
+    var bySpecialty = DX.FIRMS.filter(function (f) { return f.specialty === specialty; });
+    return { list: bySpecialty, fallback: "No local match for this specialty — showing the best available firm outside the target jurisdiction." };
+  }
+
+  function findProvenWith(candidate, alreadyPicked) {
+    if (!candidate.collaborators) return null;
+    for (var i = 0; i < candidate.collaborators.length; i++) {
+      var c = candidate.collaborators[i];
+      for (var j = 0; j < alreadyPicked.length; j++) {
+        if (alreadyPicked[j].id === c.id) return { name: alreadyPicked[j].name, count: c.count };
+      }
+    }
+    return null;
+  }
+
+  document.getElementById("generate-btn").addEventListener("click", function () {
+    var text = document.getElementById("prompt").value.trim();
+    var summaryEl = document.getElementById("parse-summary");
+    var outputEl = document.getElementById("roster-output");
+
+    if (!text) {
+      summaryEl.innerHTML = '<div class="empty-state">Describe a project above, or click one of the example chips, to generate a team.</div>';
+      outputEl.innerHTML = "";
+      return;
+    }
+
+    var propertyType = detectPropertyType(text);
+    var jurisdiction = detectJurisdiction(text);
+    var acres = detectAcres(text);
+
+    if (!propertyType || !jurisdiction) {
+      var missing = [];
+      if (!propertyType) missing.push("a property type (e.g. medical office, industrial, multifamily, retail)");
+      if (!jurisdiction) missing.push("a jurisdiction (a county, city, or state from the sample dataset)");
+      summaryEl.innerHTML = '<div class="empty-state">Couldn\'t detect ' + missing.join(" and ") + '. Try one of the example chips above, or mention them explicitly.</div>';
+      outputEl.innerHTML = "";
+      return;
+    }
+
+    var roles = requiredRoles(propertyType, acres);
+
+    summaryEl.innerHTML =
+      '<div class="note-box">' +
+        '<strong>Parsed from your brief:</strong> ' + propertyType + ' · ' + dxJurisdictionLabel(jurisdiction.id) +
+        (acres !== null ? ' · ' + acres + '-acre site' : ' · site size not specified (defaulting to include stormwater review)') +
+      '</div>';
+
+    var flagsHtml = "";
+    roles.forEach(function (rule) {
+      if (!rule.always) {
+        flagsHtml += '<div class="role-flag"><strong>' + rule.specialty + ' recommended.</strong> ' + rule.reason + ' <em>Confirm local requirements before engagement.</em></div>';
+      }
+    });
+
+    var picked = [];
+    function roleCardHtml(rule) {
+      var result = pickCandidates(rule.specialty, jurisdiction.id, propertyType);
+      var list = result.list.slice().sort(function (a, b) { return DX.overallScore(b.scores) - DX.overallScore(a.scores); });
+      var candidate = list[0];
+      if (!candidate) return "";
+      var proven = findProvenWith(candidate, picked);
+      picked.push(candidate);
+      return '<div>' +
+        '<div style="font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">' + rule.specialty + (result.fallback ? ' <span class="pill pill-muted" style="text-transform:none;font-weight:600">' + result.fallback + '</span>' : '') + '</div>' +
+        dxFirmCardHtml(candidate, { matchScore: DX.overallScore(candidate.scores), provenWith: proven }) +
+        '</div>';
+    }
+
+    // Group the required roster by lifecycle phase so a 18-role team reads as a plan, not a wall of cards.
+    var rosterHtml = "";
+    DX.PHASES.forEach(function (phaseName) {
+      var phaseRoles = roles.filter(function (r) { return r.phase === phaseName; });
+      if (!phaseRoles.length) return;
+      var phaseCards = phaseRoles.map(roleCardHtml).join("");
+      if (!phaseCards) return;
+      rosterHtml += '<h3 style="margin-top:26px;font-size:1.05rem">' + phaseName + '</h3><div class="roster">' + phaseCards + '</div>';
+    });
+
+    // Recommended (not universally required) roles, shown separately.
+    var recRoles = recommendedRoles();
+    var recHtml = recRoles.map(function (rule) {
+      var card = roleCardHtml(rule);
+      if (!card) return "";
+      return '<div class="role-flag" style="background:#eef2fa;border-color:#d7e0f3;color:var(--navy)"><strong>' + rule.specialty + '</strong> — ' + rule.reason + '</div>' + card;
+    }).join("");
+
+    outputEl.innerHTML =
+      '<h2 style="margin-top:8px">Recommended team</h2>' +
+      flagsHtml +
+      rosterHtml +
+      (recHtml ? '<h3 style="margin-top:30px;font-size:1.05rem">Recommended additions <span class="pill pill-muted" style="text-transform:none;font-weight:600">optional</span></h3><div class="roster">' + recHtml + '</div>' : '') +
+      (function () {
+        var demoProject = jurisdiction.id === "J6" ? "p02" : "p01";
+        var demoName = jurisdiction.id === "J6" ? "Arroyo Vista Apartments" : "Ironwood Medical Plaza";
+        return '<div class="note-box" style="margin-top:20px">In the full product, you\'d be able to accept this roster as-is, swap any individual firm for another match, or send it straight to Bidding to solicit competing quotes for the General Contractor role. <a href="workspace.html?project=' + demoProject + '" style="font-weight:700">See what a hired team\'s shared workspace looks like →</a> <span class="muted">(closest sample project: ' + demoName + ')</span></div>';
+      })();
+  });
+
+  // Pre-filled brief from the homepage intake form: fill and auto-generate.
+  // Runs last so the generate-btn click handler is already attached.
+  var incomingBrief = dxQueryParam("brief");
+  if (incomingBrief) {
+    document.getElementById("prompt").value = incomingBrief;
+    document.getElementById("generate-btn").click();
+  }
+</script>
+</body>
+</html>

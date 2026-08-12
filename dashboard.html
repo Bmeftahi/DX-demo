@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Your projects, bids, messages, and payments in one place." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1 id="dash-greeting">Dashboard</h1>
+    <p>Everything in flight across your projects — bids, messages, documents, and payments — in one place. This is the daily-use view a signed-in developer would land on.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+
+    <div class="dash-stats">
+      <a class="dash-stat" href="workspace.html"><div class="num" id="stat-projects">–</div><div class="lbl">Active projects</div></a>
+      <a class="dash-stat" href="bidding.html"><div class="num" id="stat-bids">–</div><div class="lbl">Bids awaiting review</div></a>
+      <a class="dash-stat" href="messages.html"><div class="num" id="stat-msgs">–</div><div class="lbl">Unread messages</div></a>
+      <a class="dash-stat" href="saved.html"><div class="num" id="stat-saved">–</div><div class="lbl">Saved firms</div></a>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h3>Active projects</h3>
+          <div id="project-cards"></div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Recent activity</h3>
+          <div id="activity-feed"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Quick actions</h3>
+          <div style="display:grid;gap:10px;margin-top:14px">
+            <a href="post-project.html" class="btn btn-gold btn-sm" style="justify-content:center">+ Post a new project</a>
+            <a href="build-team.html" class="btn btn-navy btn-sm" style="justify-content:center">Build a team from a brief</a>
+            <a href="directory.html" class="btn btn-ghost btn-sm" style="justify-content:center">Browse the directory</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Notifications</h3>
+          <div id="dash-notifs"></div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Saved firms</h3>
+          <div id="dash-saved"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  var user = dxUser();
+  document.getElementById("dash-greeting").textContent = user ? ("Welcome back, " + user.split(" ")[0]) : "Dashboard";
+
+  var totalBids = 0;
+  DX.SAMPLE_PROJECTS.forEach(function (p) { totalBids += p.bids.length; });
+  document.getElementById("stat-projects").textContent = DX.SAMPLE_PROJECTS.length;
+  document.getElementById("stat-bids").textContent = totalBids;
+  document.getElementById("stat-msgs").textContent = dxUnreadMessages();
+  document.getElementById("stat-saved").textContent = dxSavedIds().length;
+
+  document.getElementById("project-cards").innerHTML = DX.SAMPLE_PROJECTS.map(function (p) {
+    var done = 0;
+    p.timeline.forEach(function (t) { if (t.status === "Complete") done++; });
+    var pct = Math.round(100 * done / p.timeline.length);
+    var extras = DX.PROJECT_EXTRAS[p.id];
+    var fin = extras ? extras.financials : null;
+    var finHtml = fin
+      ? '<div class="muted" style="font-size:0.8rem;margin-top:8px">' + dxFormatMoney(fin.paidToDate) + ' paid of ' + dxFormatMoney(fin.contracted) + ' contracted · next milestone: <strong>' + fin.nextMilestone.name + '</strong> (' + fin.nextMilestone.due + ')</div>'
+      : "";
+    return '<div class="person-card" style="display:block">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">' +
+        '<div class="name">' + p.name + '</div>' +
+        '<span class="pill pill-gold">' + p.propertyType + ' · ' + dxJurisdictionLabel(p.jurisdictionId) + '</span>' +
+      '</div>' +
+      '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+      '<div class="muted" style="font-size:0.78rem">' + pct + '% of phases complete</div>' +
+      finHtml +
+      '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">' +
+        '<a href="workspace.html?project=' + p.id + '" class="btn btn-navy btn-sm">Workspace</a>' +
+        '<a href="bidding.html?project=' + p.id + '" class="btn btn-ghost btn-sm">Bidding (' + p.bids.length + ')</a>' +
+      '</div>' +
+    '</div>';
+  }).join("");
+
+  var allActivity = [];
+  DX.SAMPLE_PROJECTS.forEach(function (p) {
+    var ex = DX.PROJECT_EXTRAS[p.id];
+    if (ex) ex.activity.forEach(function (a) { allActivity.push({ a: a, project: p.name }); });
+  });
+  document.getElementById("activity-feed").innerHTML = allActivity.slice(0, 8).map(function (item) {
+    return '<div class="activity-item"><span>' + item.a.icon + '</span><div>' + item.a.text +
+      '<span class="atime">' + item.a.time + ' · ' + item.project + '</span></div></div>';
+  }).join("");
+
+  document.getElementById("dash-notifs").innerHTML = DX.NOTIFICATIONS.slice(0, 5).map(function (n) {
+    return '<a class="activity-item" href="' + n.href + '" style="text-decoration:none"><span>' + n.icon + '</span><div>' + n.text + '<span class="atime">' + n.time + '</span></div></a>';
+  }).join("");
+
+  var savedIds = dxSavedIds();
+  var savedEl = document.getElementById("dash-saved");
+  if (!savedIds.length) {
+    savedEl.innerHTML = '<p class="muted" style="font-size:0.87rem">Nothing saved yet. Click the ♡ on any firm card in the <a href="directory.html" style="font-weight:700;color:var(--navy)">directory</a> to shortlist it.</p>';
+  } else {
+    savedEl.innerHTML = savedIds.slice(0, 3).map(function (id) {
+      var f = DX.firmById(id);
+      return f ? '<div class="collab-card"><div><a href="firm.html?id=' + f.id + '"><strong>' + f.name + '</strong></a><div class="muted" style="font-size:0.78rem">' + f.specialty + '</div></div>' + dxSaveBtnHtml(f.id) + '</div>' : "";
+    }).join("") + (savedIds.length > 3 ? '<a href="saved.html" style="font-weight:700;font-size:0.85rem;color:var(--navy)">View all ' + savedIds.length + ' saved →</a>' : "");
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="List your firm and get matched to projects in your specialty and jurisdiction." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Join as a Specialist — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+<style>
+  .field-group { margin-bottom: 20px; }
+  .field-group label.field-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .field-group .hint { font-size: 0.78rem; color: var(--ink-soft); margin-top: 4px; }
+  .field-group input[type=text], .field-group textarea, .field-group input[type=file] {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 7px; font-size: 0.92rem; font-family: inherit; background: #fff;
+  }
+  .check-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 16px; }
+  @media (max-width: 560px) { .check-grid { grid-template-columns: 1fr; } }
+  .check-grid label { display: flex; align-items: center; gap: 7px; font-size: 0.88rem; }
+
+  .steps { display: grid; gap: 0; margin: 24px 0; }
+  .step { display: flex; gap: 14px; padding-bottom: 24px; position: relative; }
+  .step:not(:last-child)::before { content: ""; position: absolute; left: 13px; top: 30px; bottom: 0; width: 2px; background: var(--border); }
+  .step-dot { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800; z-index: 1; }
+  .step.done .step-dot { background: var(--success); color: #fff; }
+  .step.current .step-dot { background: var(--gold); color: var(--navy-dark); }
+  .step.pending .step-dot { background: #eceae3; color: var(--ink-soft); }
+  .step h4 { margin-bottom: 3px; font-size: 0.95rem; }
+  .step p { margin-bottom: 0; font-size: 0.85rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html" class="active">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1>Join as a Specialist</h1>
+    <p>This is the other side of the marketplace — how a firm gets discovered and matched, instead of chasing leads through its own website and word of mouth.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container-narrow">
+
+    <div id="form-view">
+      <div class="card">
+        <h3>Firm profile</h3>
+        <p class="muted" style="font-size:0.87rem">This becomes your matchable profile — the more complete it is, the better the matching engine can place you.</p>
+
+        <form id="join-form">
+          <div class="field-group">
+            <label class="field-label" for="jf-name">Firm name *</label>
+            <input type="text" id="jf-name" placeholder="e.g. Desert Sky Architecture" required />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="jf-specialty">Primary specialty *</label>
+            <select id="jf-specialty" required></select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Jurisdictions served *</label>
+            <div class="check-grid" id="jf-jurisdictions"></div>
+            <div class="hint">Firms with confirmed project history in a jurisdiction rank higher for developers filtering by local code familiarity.</div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label">Property type experience *</label>
+            <div class="check-grid" id="jf-proptypes"></div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="jf-bio">Firm bio</label>
+            <textarea id="jf-bio" rows="3" placeholder="A couple sentences on what you do and the kind of projects you take on."></textarea>
+          </div>
+
+          <div class="card" style="background:var(--bg);margin:24px 0">
+            <h4 style="margin-bottom:4px">Trust &amp; verification</h4>
+            <p class="muted" style="font-size:0.85rem;margin-bottom:16px">Checked before your profile goes live — this is what makes matches on the platform trustworthy instead of self-reported.</p>
+            <div class="field-group">
+              <label class="field-label" for="jf-license">License number</label>
+              <input type="text" id="jf-license" placeholder="e.g. AZ Architect #A34821" />
+              <div class="hint">Verified against the relevant state licensing board.</div>
+            </div>
+            <div class="field-group" style="margin-bottom:0">
+              <label class="field-label" for="jf-insurance">Certificate of insurance</label>
+              <input type="file" id="jf-insurance" />
+              <div class="hint">Kept on file and tracked for expiration — documentation collected directly, distinct from the state-board license check.</div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-gold" style="width:100%">Submit for verification</button>
+          <p class="muted" style="font-size:0.78rem;text-align:center;margin-top:10px">Demo only — nothing is actually submitted or stored.</p>
+        </form>
+      </div>
+    </div>
+
+    <div id="confirm-view" style="display:none">
+      <div class="card" style="text-align:center;padding:36px 24px">
+        <div class="badge-verified" style="font-size:1rem;justify-content:center;margin-bottom:10px">Submitted</div>
+        <h2 id="confirm-name" style="margin-bottom:6px"></h2>
+        <p class="muted">Your profile has been submitted. Here's what happens next.</p>
+      </div>
+
+      <div class="card" style="margin-top:20px">
+        <div class="steps">
+          <div class="step done">
+            <div class="step-dot">✓</div>
+            <div><h4>Profile submitted</h4><p>Firm details, jurisdictions, and property-type experience received.</p></div>
+          </div>
+          <div class="step current">
+            <div class="step-dot">2</div>
+            <div><h4>Verification in progress</h4><p>License checked against the relevant state board — a true verification. The certificate of insurance is logged as documentation on file and tracked for expiration.</p></div>
+          </div>
+          <div class="step pending">
+            <div class="step-dot">3</div>
+            <div><h4>Live &amp; matchable</h4><p>Once verified, your profile appears in directory search, map results, and Build My Team matching for your specialty, jurisdictions, and property types.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-box" style="margin-top:20px">In the full product this would be a real review queue with a typical turnaround time shown here. While you wait, browse the <a href="directory.html">directory</a> to see how firms in your specialty are presented today.</div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  document.getElementById("jf-specialty").innerHTML =
+    '<option value="">Select a specialty…</option>' +
+    DX.SPECIALTIES.map(function (s) { return '<option value="' + s + '">' + s + '</option>'; }).join("");
+
+  document.getElementById("jf-jurisdictions").innerHTML = DX.JURISDICTIONS.map(function (j) {
+    return '<label><input type="checkbox" value="' + j.id + '" /> ' + j.county + ', ' + j.state + '</label>';
+  }).join("");
+
+  document.getElementById("jf-proptypes").innerHTML = DX.PROPERTY_TYPES.map(function (pt) {
+    return '<label><input type="checkbox" value="' + pt + '" /> ' + pt + '</label>';
+  }).join("");
+
+  document.getElementById("join-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("jf-name").value.trim();
+    var specialty = document.getElementById("jf-specialty").value;
+    if (!name || !specialty) {
+      alert("Add at least a firm name and specialty to continue — this is a demo, but the required fields are real.");
+      return;
+    }
+    document.getElementById("confirm-name").textContent = name;
+    document.getElementById("form-view").style.display = "none";
+    document.getElementById("confirm-view").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+</body>
+</html>

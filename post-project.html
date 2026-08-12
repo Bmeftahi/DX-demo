@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Post a project once and invite qualified local firms for every recommended role." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Post a Project — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1>Post a project</h1>
+    <p>Describe the project once. The platform recommends the roles your project typically needs, matches qualified local firms for each, and invites them to bid — no cold calls, no twenty separate RFP emails.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container-narrow">
+    <div class="card" id="form-view">
+      <h3>Project details</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px" class="pp-grid">
+        <div>
+          <label class="group-label" for="pp-name" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">Project name</label>
+          <input type="text" id="pp-name" placeholder="e.g. Saguaro Commons Phase II" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit" />
+        </div>
+        <div>
+          <label class="group-label" for="pp-type" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">Property type</label>
+          <select id="pp-type" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit"></select>
+        </div>
+        <div>
+          <label class="group-label" for="pp-jurisdiction" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">Jurisdiction</label>
+          <select id="pp-jurisdiction" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit"></select>
+        </div>
+        <div>
+          <label class="group-label" for="pp-budget" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">Budget range</label>
+          <select id="pp-budget" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit">
+            <option>Under $5M</option><option>$5M – $15M</option><option>$15M – $40M</option><option>$40M+</option>
+          </select>
+        </div>
+        <div>
+          <label class="group-label" for="pp-sqft" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">Building size (sq ft)</label>
+          <input type="number" id="pp-sqft" placeholder="40000" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit" />
+        </div>
+        <div>
+          <label class="group-label" for="pp-acres" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">Site size (acres)</label>
+          <input type="number" step="0.1" id="pp-acres" placeholder="3.2" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:0.9rem;font-family:inherit" />
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <label class="group-label" for="pp-desc" style="display:block;font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">Description (optional)</label>
+        <textarea id="pp-desc" placeholder="Anything firms should know — timeline goals, site conditions, tenant requirements…"></textarea>
+      </div>
+      <div class="checkline" style="margin-top:14px"><input type="checkbox" id="pp-blind" checked /><label for="pp-blind">Use blind bidding (firms can't see each other's pricing until the deadline)</label></div>
+      <div class="checkline"><input type="checkbox" id="pp-verified" checked /><label for="pp-verified">Only invite license-verified firms</label></div>
+      <button class="btn btn-gold" id="pp-submit" style="margin-top:16px">Match firms &amp; preview invitations →</button>
+      <p class="muted" style="font-size:0.78rem;margin:12px 0 0">Demo only — nothing is sent. In the real product this would notify matched firms and open a live RFP.</p>
+    </div>
+
+    <div id="result-view" style="display:none">
+      <div class="note-box" id="pp-summary" style="margin-bottom:20px"></div>
+      <div class="card">
+        <h3>Who gets invited</h3>
+        <p class="muted" style="font-size:0.87rem">One invitation per recommended role, to every qualified firm — confirm final requirements against your jurisdiction and entitlement path. The best match per role is previewed below.</p>
+        <div id="pp-roles"></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
+        <button class="btn btn-navy btn-sm" id="pp-edit">← Edit project</button>
+        <a href="bidding.html" class="btn btn-ghost btn-sm">See what returned bids look like →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  document.getElementById("pp-type").innerHTML = DX.PROPERTY_TYPES.map(function (pt) { return '<option>' + pt + '</option>'; }).join("");
+  document.getElementById("pp-jurisdiction").innerHTML = DX.JURISDICTIONS.map(function (j) { return '<option value="' + j.id + '">' + j.county + ', ' + j.state + '</option>'; }).join("");
+
+  document.getElementById("pp-submit").addEventListener("click", function () {
+    var name = document.getElementById("pp-name").value.trim() || "Untitled project";
+    var ptype = document.getElementById("pp-type").value;
+    var jid = document.getElementById("pp-jurisdiction").value;
+    var acres = parseFloat(document.getElementById("pp-acres").value);
+    var verifiedOnly = document.getElementById("pp-verified").checked;
+    var blind = document.getElementById("pp-blind").checked;
+    var j = DX.jurisdictionById(jid);
+
+    var roles = DX.ROLE_REQUIREMENTS.filter(function (rule) {
+      if (rule.recommended) return false;
+      if (rule.always) return true;
+      if (rule.condition === "acres") return isNaN(acres) || acres >= rule.threshold;
+      if (rule.condition === "lighting") return rule.propertyTypes.indexOf(ptype) !== -1;
+      return true;
+    });
+
+    var totalInvited = 0;
+    var rolesHtml = roles.map(function (rule) {
+      var candidates = DX.FIRMS.filter(function (f) {
+        if (f.specialty !== rule.specialty) return false;
+        if (verifiedOnly && !f.verified) return false;
+        var local = f.jurisdictions.indexOf(jid) !== -1;
+        var typed = f.propertyTypes.indexOf(ptype) !== -1;
+        return local || typed;
+      }).sort(function (a, b) {
+        var aScore = DX.overallScore(a.scores) + (a.jurisdictions.indexOf(jid) !== -1 ? 10 : 0) + (a.propertyTypes.indexOf(ptype) !== -1 ? 5 : 0);
+        var bScore = DX.overallScore(b.scores) + (b.jurisdictions.indexOf(jid) !== -1 ? 10 : 0) + (b.propertyTypes.indexOf(ptype) !== -1 ? 5 : 0);
+        return bScore - aScore;
+      });
+      totalInvited += candidates.length;
+      var top = candidates[0];
+      return '<div style="margin-top:18px">' +
+        '<div style="font-size:0.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">' + rule.specialty +
+        ' <span class="pill pill-muted" style="text-transform:none;font-weight:600">' + candidates.length + ' firm' + (candidates.length === 1 ? "" : "s") + ' will be invited</span></div>' +
+        (top ? dxFirmCardHtml(top) : '<p class="muted" style="font-size:0.85rem">No qualified firm in the sample data yet — the invitation would go out as the network grows.</p>') +
+      '</div>';
+    }).join("");
+
+    document.getElementById("pp-summary").innerHTML =
+      '<strong>' + name + '</strong> — ' + ptype + ' in ' + j.county + ', ' + j.state + '. ' +
+      roles.length + ' typically-required roles identified · ' + totalInvited + ' qualified firms will receive invitations · ' +
+      (blind ? "blind bidding on" : "open bidding") + (verifiedOnly ? " · verified firms only" : "") + ".";
+    document.getElementById("pp-roles").innerHTML = rolesHtml;
+    document.getElementById("form-view").style.display = "none";
+    document.getElementById("result-view").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("pp-edit").addEventListener("click", function () {
+    document.getElementById("result-view").style.display = "none";
+    document.getElementById("form-view").style.display = "block";
+  });
+</script>
+
+</body>
+</html>

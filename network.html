@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Visual graph of confirmed working relationships between firms." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Relationship Network — Development Exchange</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+<style>
+  .network-wrap { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+  .net-node circle { fill: var(--navy); stroke: #fff; stroke-width: 2; }
+  .net-node text { fill: #fff; font-size: 12px; font-weight: 700; font-family: inherit; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .net-node:hover circle { fill: var(--gold); }
+  .net-edge { stroke: var(--gold); }
+  .net-edge-label { font-size: 10px; fill: var(--ink-soft); text-anchor: middle; font-family: inherit; }
+  .legend-line { display: inline-block; width: 30px; height: 3px; background: var(--gold); vertical-align: middle; margin-right: 6px; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">DX</span> Development Exchange <span class="demo-flag">Concept Demo</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <form class="nav-search" action="directory.html" method="get">
+        <input type="text" name="q" placeholder="Search architect, SWPPP…" aria-label="Search firms" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <a href="index.html">Overview</a>
+      <a href="directory.html">Directory</a>
+      <a href="build-team.html">Build Team</a>
+      <a href="map.html">Map</a>
+      <a href="bidding.html">Bidding</a>
+      <a href="workspace.html">Workspace</a>
+      <a href="teams.html">Teams</a>
+      <a href="network.html" class="active">Network</a>
+      <a href="jurisdictions.html">Codes</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join</a>
+    </div>
+    <div class="nav-icons">
+      <a href="saved.html" class="nav-icon" title="Saved firms">♡<span class="nav-badge" id="saved-badge" style="display:none"></span></a>
+      <a href="messages.html" class="nav-icon" title="Messages">✉<span class="nav-badge" id="msg-badge" style="display:none"></span></a>
+      <button class="nav-icon" id="notif-btn" title="Notifications" aria-label="Notifications">🔔<span class="nav-badge" id="notif-badge" style="display:none"></span></button>
+      <a href="dashboard.html" class="signin-btn" id="signin-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <h1>Relationship Network</h1>
+    <p>A visual view of confirmed collaborations — firms that have mutually confirmed working together before. Thicker lines mean more shared projects. Click a firm to open its profile.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="filter-group" style="max-width:320px;margin-bottom:20px">
+      <label class="group-label" for="net-jurisdiction">Jurisdiction</label>
+      <select id="net-jurisdiction"></select>
+    </div>
+
+    <div class="network-wrap">
+      <div id="net-svg-holder"></div>
+    </div>
+
+    <p class="muted" style="font-size:0.82rem;margin-top:10px"><span class="legend-line"></span> line thickness = number of confirmed projects together</p>
+
+    <div class="card" style="margin-top:24px">
+      <h3>All confirmed collaborations in this jurisdiction</h3>
+      <div id="collab-fallback-list"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-cols">
+    <div class="footer-col">
+      <h5><span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy-dark);padding:2px 7px;border-radius:5px;font-weight:800;margin-right:6px">DX</span>Development Exchange</h5>
+      <p style="color:rgba(255,255,255,0.6);font-size:0.83rem;margin:0">One marketplace for every specialist in commercial real estate development — from land acquisition to lease-up.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Find &amp; hire</h5>
+      <a href="directory.html">Firm directory</a>
+      <a href="build-team.html">Build my team</a>
+      <a href="post-project.html">Post a project</a>
+      <a href="map.html">Firm map</a>
+      <a href="teams.html">Packaged teams</a>
+    </div>
+    <div class="footer-col">
+      <h5>Your account</h5>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="messages.html">Messages</a>
+      <a href="saved.html">Saved firms</a>
+      <a href="workspace.html">Project workspace</a>
+      <a href="bidding.html">Bidding</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About &amp; how it works</a>
+      <a href="vision.html">The full vision</a>
+      <a href="about.html#faq">FAQ</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="join.html">Join as a specialist</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div>Development Exchange — concept demo. All firms, people, reviews, and data shown are fictional sample content. Map data © OpenStreetMap contributors.</div>
+    <div><a href="index.html">Back to overview</a></div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  var sel = document.getElementById("net-jurisdiction");
+  sel.innerHTML = dxOptionsHtml(DX.JURISDICTIONS, "All jurisdictions");
+  // default to J1 (richest sample data) rather than "all"
+  var preset = dxQueryParam("jurisdiction");
+  sel.value = preset || "J1";
+
+  function render() {
+    var jid = sel.value;
+    var firms = DX.FIRMS.filter(function (f) { return !jid || f.jurisdictions.indexOf(jid) !== -1; });
+
+    var edges = [];
+    for (var i = 0; i < firms.length; i++) {
+      for (var j = i + 1; j < firms.length; j++) {
+        var count = DX.collabCount(firms[i].id, firms[j].id);
+        if (count > 0) edges.push({ a: i, b: j, count: count });
+      }
+    }
+
+    var holder = document.getElementById("net-svg-holder");
+    if (!edges.length) {
+      holder.innerHTML = '<div class="empty-state">No confirmed collaborations recorded between firms in this jurisdiction yet in the sample data. Try Maricopa County, AZ — it has the richest relationship data.</div>';
+    } else {
+      var size = 560;
+      var cx = size / 2, cy = size / 2, radius = size / 2 - 60;
+      var positions = firms.map(function (f, i) {
+        var angle = -Math.PI / 2 + i * (2 * Math.PI / firms.length);
+        return { x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) };
+      });
+
+      var edgesSvg = edges.map(function (e) {
+        var p1 = positions[e.a], p2 = positions[e.b];
+        var mx = (p1.x + p2.x) / 2, my = (p1.y + p2.y) / 2;
+        return '<line class="net-edge" x1="' + p1.x + '" y1="' + p1.y + '" x2="' + p2.x + '" y2="' + p2.y + '" stroke-width="' + (1 + e.count * 0.7) + '" opacity="0.65" />' +
+          '<rect x="' + (mx - 8) + '" y="' + (my - 7) + '" width="16" height="13" fill="#fff" opacity="0.85" />' +
+          '<text class="net-edge-label" x="' + mx + '" y="' + (my + 3) + '">' + e.count + '</text>';
+      }).join("");
+
+      var nodesSvg = firms.map(function (f, i) {
+        var p = positions[i];
+        return '<a href="firm.html?id=' + f.id + '" class="net-node">' +
+          '<title>' + f.name + ' — ' + f.specialty + '</title>' +
+          '<circle cx="' + p.x + '" cy="' + p.y + '" r="24"></circle>' +
+          '<text x="' + p.x + '" y="' + p.y + '">' + dxInitials(f.name) + '</text>' +
+        '</a>';
+      }).join("");
+
+      holder.innerHTML = '<svg viewBox="0 0 ' + size + ' ' + size + '" style="width:100%;height:auto;max-height:620px">' + edgesSvg + nodesSvg + '</svg>';
+    }
+
+    // Fallback / accessible list of every confirmed pair
+    if (edges.length) {
+      document.getElementById("collab-fallback-list").innerHTML = edges.map(function (e) {
+        var fa = firms[e.a], fb = firms[e.b];
+        return '<div class="collab-card">' +
+          '<div><a href="firm.html?id=' + fa.id + '">' + fa.name + '</a> <span class="muted">↔</span> <a href="firm.html?id=' + fb.id + '">' + fb.name + '</a></div>' +
+          '<span class="proven-badge">✓ ' + e.count + ' confirmed project' + (e.count === 1 ? "" : "s") + '</span>' +
+        '</div>';
+      }).join("");
+    } else {
+      document.getElementById("collab-fallback-list").innerHTML = '<p class="muted" style="font-size:0.85rem">None yet.</p>';
+    }
+  }
+
+  sel.addEventListener("change", render);
+  render();
+</script>
+</body>
+</html>
