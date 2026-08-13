@@ -63,7 +63,7 @@ p { margin: 0 0 1em; color: var(--ink); }
 .nav-search button:hover { color: #fff; }
 
 @media (max-width: 1180px) { .nav-search input { width: 110px; } }
-@media (max-width: 1040px) {
+@media (max-width: 1200px) {
   .navlinks { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--navy-dark); padding: 8px 0; box-shadow: 0 12px 24px rgba(0,0,0,0.28); border-top: 1px solid rgba(255,255,255,0.08); }
   .navlinks.open { display: flex; }
   .navlinks a { padding: 14px 24px; border-radius: 0; }
@@ -416,7 +416,7 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus {
   transition: transform 0.2s var(--ease);
 }
 .navlinks a:hover::after, .navlinks a.active::after { transform: scaleX(1); }
-@media (max-width: 1040px) { .navlinks a::after { display: none; } }
+@media (max-width: 1200px) { .navlinks a::after { display: none; } }
 
 /* ---- tables: row feedback ---- */
 table.bids tbody tr, table.compare tbody tr { transition: background 0.15s ease; }
@@ -460,3 +460,13 @@ details.faq[open] { border-color: var(--gold-light); box-shadow: var(--shadow); 
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ---- mid-width nav fit (prevents horizontal overflow on laptops) ---- */
+@media (min-width: 1201px) and (max-width: 1460px) {
+  .topnav .nav-search { display: none; }
+  .navlinks a { padding: 8px 9px; font-size: 0.86rem; }
+  .brand .demo-flag { display: none; }
+  .nav-icons { margin-left: 4px; }
+}
+/* belt-and-braces: never allow sideways scroll */
+html, body { max-width: 100%; overflow-x: hidden; }
