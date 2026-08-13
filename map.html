@@ -5,6 +5,17 @@
 <meta name="description" content="See where every firm is based and filter by local jurisdiction experience." />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Map — Development Exchange</title>
+<meta name="theme-color" content="#1f3864" />
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Development Exchange" />
+<meta property="og:title" content="Map — Development Exchange" />
+<meta property="og:description" content="See where every firm is based and filter by local jurisdiction experience." />
+<meta property="og:image" content="assets/img/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Map — Development Exchange" />
+<meta name="twitter:description" content="See where every firm is based and filter by local jurisdiction experience." />
+<meta name="twitter:image" content="assets/img/og-card.png" />
 <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 </head>
@@ -123,7 +134,7 @@
   specialtySel.innerHTML = dxOptionsHtml(DX.SPECIALTIES, "All specialties");
   jurisdictionSel.innerHTML = dxOptionsHtml(DX.JURISDICTIONS, "All jurisdictions");
 
-  var map = L.map("map").setView([38.5, -98], 4);
+  var map = L.map("map").setView([34.02, -117.42], 9);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
     attribution: "&copy; OpenStreetMap contributors"
@@ -173,7 +184,7 @@
       map.setView([j.lat, j.lng], 9);
     } else {
       document.getElementById("jurisdiction-info").textContent = "Select a jurisdiction to see its permitting profile.";
-      map.setView([38.5, -98], 4);
+      map.setView([34.02, -117.42], 9);
     }
   }
 

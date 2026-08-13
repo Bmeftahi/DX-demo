@@ -5,6 +5,17 @@
 <meta name="description" content="Visual graph of confirmed working relationships between firms." />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Relationship Network — Development Exchange</title>
+<meta name="theme-color" content="#1f3864" />
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Development Exchange" />
+<meta property="og:title" content="Relationship Network — Development Exchange" />
+<meta property="og:description" content="Visual graph of confirmed working relationships between firms." />
+<meta property="og:image" content="assets/img/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Relationship Network — Development Exchange" />
+<meta name="twitter:description" content="Visual graph of confirmed working relationships between firms." />
+<meta name="twitter:image" content="assets/img/og-card.png" />
 <link rel="stylesheet" href="assets/css/style.css" />
 <style>
   .network-wrap { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
@@ -120,7 +131,7 @@
   sel.innerHTML = dxOptionsHtml(DX.JURISDICTIONS, "All jurisdictions");
   // default to J1 (richest sample data) rather than "all"
   var preset = dxQueryParam("jurisdiction");
-  sel.value = preset || "J1";
+  sel.value = preset || "J6";
 
   function render() {
     var jid = sel.value;
@@ -136,7 +147,7 @@
 
     var holder = document.getElementById("net-svg-holder");
     if (!edges.length) {
-      holder.innerHTML = '<div class="empty-state">No confirmed collaborations recorded between firms in this jurisdiction yet in the sample data. Try Maricopa County, AZ — it has the richest relationship data.</div>';
+      holder.innerHTML = '<div class="empty-state">No confirmed collaborations recorded between these firms yet in the sample data.</div>';
     } else {
       var size = 560;
       var cx = size / 2, cy = size / 2, radius = size / 2 - 60;
